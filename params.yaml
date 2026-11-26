@@ -1,0 +1,48 @@
+group_id: G128
+
+# Settings for the MP074 Parcel Delivery Days pipeline.
+# Read by src/mp074/config.py with yaml.safe_load.
+
+paths:
+  train: data/raw/train.csv
+  later: data/raw/later.csv
+  holdout: data/raw/holdout_features.csv
+  findings: reports/findings.yaml
+  holdout_predictions: predictions/holdout_predictions.csv
+  model: models/model.joblib
+  mlflow_uri: sqlite:///mlflow.db
+
+data:
+  target: delivery_days
+  record_id: record_id
+  date: date
+  group_column: destination
+  sentinel_values:
+    transfers: [9999]
+  leak_correlation_threshold: 0.95
+
+model:
+  registered_name: mp074-delivery-days
+  experiment_name: mp074-delivery-days
+  random_state: 42
+  cv_folds: 5
+  candidates:
+    - name: ridge_alpha1
+      kind: ridge
+      params: {alpha: 1.0}
+    - name: rf_depth6
+      kind: random_forest
+      params: {n_estimators: 200, max_depth: 6, min_samples_leaf: 5}
+    - name: gbr_depth2
+      kind: gradient_boosting
+      params: {n_estimators: 300, learning_rate: 0.05, max_depth: 2}
+    - name: gbr_depth3
+      kind: gradient_boosting
+      params: {n_estimators: 300, learning_rate: 0.05, max_depth: 3}
+
+drift:
+  psi_bins: 10
+
+promotion:
+  retrain_fraction: 0.7
+  min_relative_mae_drop: 0.12
