@@ -1,0 +1,53 @@
+group_id: G128
+problem_id: MP074
+data_issues:
+  leaking_column:
+    present: true
+    column: days_from_tracking_page
+  unit_mixup:
+    present: false
+    column: null
+    group_value: null
+    factor: null
+  sentinel_value:
+    present: true
+    column: transfers
+    value: 9999
+    count: 46
+  duplicate_rows:
+    present: false
+    count: null
+  stuck_sensor:
+    present: false
+    column: null
+    start_date: null
+    end_date: null
+  target_typos:
+    present: false
+    count: null
+  spelling_variants:
+    present: true
+    column: service
+    true_levels: 3
+tracking:
+  experiment_name: mp074-delivery-days
+  best_run_id: 0821f17b263d49a89b645ab064bb5794
+  registered_model_name: mp074-delivery-days
+  champion_version: 1
+monitoring:
+  psi:
+    distance_km: 0.041026261681326476
+    weight_kg: 0.010932092262545559
+    hub_backlog: 0.03821681185162084
+    pin_code_tier: 0.00013245807723488243
+    declared_value_rs: 5.317622499652187
+    transfers: 0.03139696907338413
+  most_drifted_feature: declared_value_rs
+  mae_by_group:
+    Metro: 1.1506887648443023
+    Tier-2: 0.40149942144952616
+    Rural: 0.4009395565319012
+  worst_served_group: Metro
+  mae_v1_on_check: 0.6515648784087184
+  mae_v2_on_check: 0.5835130079177522
+  decision: keep
