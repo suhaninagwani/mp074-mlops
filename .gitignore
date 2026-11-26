@@ -1,0 +1,14 @@
+# Data: tracked by DVC through the .dvc files, never committed directly
+data/raw/train.csv
+data/raw/later.csv
+
+# MLflow artifact folders (the tool reads only mlflow.db)
+mlruns/
+mlartifacts/
+
+# Python and tool caches
+__pycache__/
+*.pyc
+.pytest_cache/
+venv/
+.venv/
