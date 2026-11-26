@@ -66,13 +66,12 @@ def cmd_findings() -> None:
         print("  reports/findings.yaml not found: run the model part first")
         return
     f = yaml.safe_load(path.read_text())
-    m, d, r = f["mlflow"], f["drift"], f["retraining"]
-    print(f"  champion version      : {m['champion_version']} (v1 candidate {m['v1_best_candidate']})")
-    print(f"  v1 MAE later.csv      : {m['v1_mae_later']:.4f}  (CV on train {m['v1_cv_mae_train']:.4f})")
-    print(f"  most drifted column   : {d['most_drifted_column']} (PSI {d['most_drifted_psi']:.3f})")
-    print(f"  worst-served group    : {f['error_by_group']['worst_served_group']}")
-    print(f"  v2 reduction, last 30%: {r['relative_mae_reduction']:.2%}  promoted={r['promoted']}")
-    print(f"  holdout rows predicted: {f['holdout']['rows_predicted']}")
+    m = f["monitoring"]
+    print(f"  group id              : {f['group_id']}")
+    print(f"  champion version      : {f['tracking']['champion_version']} (best run {f['tracking']['best_run_id']})")
+    print(f"  most drifted feature  : {m['most_drifted_feature']} (PSI {m['psi'][m['most_drifted_feature']]:.3f})")
+    print(f"  worst-served group    : {m['worst_served_group']}")
+    print(f"  MAE v1 / v2 last 30%  : {m['mae_v1_on_check']:.4f} / {m['mae_v2_on_check']:.4f}  decision={m['decision']}")
 
 
 def cmd_ops() -> None:
