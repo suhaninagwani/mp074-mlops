@@ -6,7 +6,7 @@ Goal: predict `delivery_days` (regression, measured by MAE in days).
 | Field | Value |
 |---|---|
 | Problem id | MP074 |
-| Group id | TODO: fill in from the faculty e-mail |
+| Group id | G128 |
 | Batch / faculty | 13 / Ravi Pratap |
 
 ## Members
